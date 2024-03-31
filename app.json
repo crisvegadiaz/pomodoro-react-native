@@ -4,7 +4,7 @@
     "slug": "pomodoro",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/pomodoroIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/pomodoroIcon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.crisdiazvega.pomodoro"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6b8a5326-4afe-4c86-be10-b42424fd8f0d"
+      }
     }
   }
 }

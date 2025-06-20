@@ -1,40 +1,55 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-const options = ["Pomodoro", "Short Break", "Long Break"];
+const OPTIONS = [
+  { label: "Pomodoro", minutes: 25 },
+  { label: "Short Break", minutes: 5 },
+  { label: "Long Break", minutes: 15 },
+];
 
 export default function Header({ currentTime, setCurrentTime, setTime }) {
   const handlePress = (index) => {
-    const newTime = index === 0 ? 25 : index === 1 ? 5 : 15;
     setCurrentTime(index);
-    setTime(newTime * 60);
+    setTime(OPTIONS[index].minutes * 60);
   };
 
   return (
-    <View style={{ flexDirection: "row" }}>
-      {options.map((item, index) => (
-        <TouchableOpacity
-          key={index}
-          onPress={() => handlePress(index)}
-          style={[
-            styles.itemStyle,
-            currentTime !== index && { borderColor: "transparent" },
-          ]}
-        >
-          <Text style={{ fontWeight: "bold" }}>{item}</Text>
-        </TouchableOpacity>
-      ))}
+    <View style={styles.container}>
+      {OPTIONS.map((option, index) => {
+        const isActive = currentTime === index;
+        return (
+          <TouchableOpacity
+            key={option.label}
+            onPress={() => handlePress(index)}
+            style={[
+              styles.item,
+              !isActive && styles.inactiveItem,
+            ]}
+          >
+            <Text style={styles.text}>{option.label}</Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  itemStyle: {
-    width: "33%",
+  container: {
+    flexDirection: "row",
+  },
+  item: {
+    flex: 1,
     alignItems: "center",
     borderWidth: 3,
     padding: 5,
     borderRadius: 10,
     borderColor: "white",
     marginVertical: 20,
+  },
+  inactiveItem: {
+    borderColor: "transparent",
+  },
+  text: {
+    fontWeight: "bold",
   },
 });
